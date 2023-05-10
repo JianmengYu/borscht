@@ -1,4 +1,5 @@
 #![feature(entry_insert)]
+#![feature(let_chains)]
 
 extern crate serde;
 extern crate serde_derive;

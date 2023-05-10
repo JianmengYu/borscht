@@ -158,6 +158,8 @@ txtsetequipw int txtsetequipw_arg1
 txtsetchocoword int txtsetchocoword_arg1
 txtsetchocoword2 int txtsetchocoword2_arg1
 txtsetchocoword3 int txtsetchocoword3_arg1
+txtsetcustom int txtsetcustom_prm0
+txtsetlimitp int txtsetlimitp_prm0
 limitmax int limitmax_arg1, int limitmax_arg2
 maplevel int
 mapfile int mapfile_mapid

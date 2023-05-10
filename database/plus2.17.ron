@@ -1,0 +1,122 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.17",
+    ax_sha256: "c466116c096e402c9eef4285049bf9efecfa9c3dfbdd69bc56d604b0e83c4405"
+  ),
+
+  includes: [
+    "database/plus2.15R.ron"
+  ],
+
+  variable_groups: {
+    "chara_id": (
+      variables: [
+        ( name: "CREATURE_ID_ETHERIAN", value: 1073 ),
+        ( name: "CREATURE_ID_CHAOSHAPRINCESS_MEM", value: 1074 ),
+        ( name: "CREATURE_ID_CHAOSHAPRINCESS_FWBS", value: 1075 ),
+        ( name: "CREATURE_ID_CHAOSHAPRINCESS_FSSSY", value: 1076 ),
+        ( name: "CREATURE_ID_CHAOSHAPRINCESS_CHRDH", value: 1077 ),
+        ( name: "CREATURE_ID_ETHERIAN_PLUS", value: 1078 ),
+        ( name: "CREATURE_ID_CHAOSHAPRINCESS_VARGM", value: 1079 ),
+        ( name: "CREATURE_ID_CHAOSHAPRINCESS_DIBWL", value: 1080 ),
+        ( name: "CREATURE_ID_CHAOSHAPRINCESS_ZEHLS", value: 1081 ),
+
+        ( name: "MAX_CREATURE_ID", value: 1084, code_value: "CREATURE_ID_CHAOSHAPRINCESS_ZEHLS + 3" ),
+      ]
+    ),
+    "animation_id": (
+      variables: [
+        ( name: "ANIMATION_HYPER_PLUG_BURST", value: 63 ),
+      ]
+    ),
+    "gdata": (
+      variables: [
+        (
+          name: "GDATA_FLAG_FIGHTER_GUILD_QUEST_LEVEL",
+          value: 693,
+          code_value: "STARTING_GDATA_FLAG + 443"
+        ),
+      ]
+    ),
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_X_FRAME", value: 1268 ),
+        ( name: "ITEM_ID_PV_FIXER", value: 1269 ),
+        ( name: "ITEM_ID_DV_FIXER", value: 1270 ),
+        ( name: "ITEM_ID_RES_UPPER", value: 1271 ),
+        ( name: "ITEM_ID_FIGHTING_DESTONE", value: 1272 ),
+        ( name: "ITEM_ID_MANA_DESTONE", value: 1273 ),
+        ( name: "ITEM_ID_AWAKE_DESTONE", value: 1274 ),
+        ( name: "ITEM_ID_WHITE_DARK_ORB", value: 1275 ),
+
+        ( name: "MAX_ITEM_ID", value: 1278, code_value: "ITEM_ID_WHITE_DARK_ORB + 3", exclude: true ),
+      ],
+    ),
+    "cell_sub_feature": (
+      variables: [
+        ( name: "CELL_SUB_FEATURE_TRAP_VIBRATING_SPEAR", value: 23 ),
+        ( name: "CELL_SUB_FEATURE_TRAP_POISON_SPEAR", value: 24 ),
+        ( name: "CELL_SUB_FEATURE_TRAP_SLEEPY_SPEAR", value: 25 ),
+        ( name: "CELL_SUB_FEATURE_TRAP_INK_SPEAR", value: 26 ),
+        ( name: "CELL_SUB_FEATURE_TRAP_SMELLY_SPEAR", value: 27 ),
+        ( name: "CELL_SUB_FEATURE_TRAP_PARALYZE_SPEAR", value: 28 ),
+      ],
+    ),
+    "item_effect": (
+      variables: [
+        ( name: "EFFECT_X_FRAME", value: 138 ),
+        ( name: "EFFECT_RES_UPPER", value: 139 ),
+        ( name: "EFFECT_DV_FIXER", value: 140 ),
+        ( name: "EFFECT_PV_FIXER", value: 141 ),
+        ( name: "EFFECT_MANA_DESTONE", value: 142 ),
+        ( name: "EFFECT_FIGHTING_DESTONE", value: 143 ),
+        ( name: "EFFECT_WHITE_DARK_ORB", value: 144 ),
+        ( name: "EFFECT_AWAKE_DESTONE", value: 145 ),
+      ]
+    ),
+    "item_bit": (
+      variables: [
+        ( name: "ITEM_BIT_SHOP_SAMPLE", value: 21 ),
+      ]
+    ),
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_CUSTOM_CHANGE", value: 848, ),
+        ( name: "SKILL_SPACT_HYPER_PLUG_BURST", value: 849, ),
+        ( name: "SKILL_SPACT_LIMIT_POWER", value: 850, ),
+        ( name: "SKILL_SPACT_LIMITER_VANISH", value: 851, ),
+
+        ( name: "MAX_SKILL", value: 852, code_value: "SKILL_SPACT_LIMITER_VANISH + 1" ),
+      ]
+    ),
+    "sound_id": (
+      variables: [
+        ( name: "SOUNDLIST_HAWK1", value: 303 ),
+      ]
+    ),
+  },
+
+  arrays: {},
+
+  expressions: {},
+
+  functions: {
+    "txtsetcustom": (
+      args: {
+        0: (name: "arg1", type: Int),
+      }
+    ),
+    "txtsetlimitp": (
+      args: {
+        0: (name: "arg1", type: Int),
+      }
+    ),
+  },
+
+  labels: {},
+
+  files: {}
+)
