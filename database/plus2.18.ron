@@ -62,7 +62,7 @@ AnalysisConfig(
         ( name: "ITEM_ID_HAMAGURI", value: 1286 ),
         ( name: "ITEM_ID_SAZAE", value: 1287 ),
 
-        ( name: "MAX_ITEM_ID", value: 1278, code_value: "ITEM_ID_WHITE_DARK_ORB + 3", exclude: true ),
+        ( name: "MAX_ITEM_ID", value: 1290, code_value: "ITEM_ID_SAZAE + 3", exclude: true ),
       ],
     ),
     "filter_item": (
