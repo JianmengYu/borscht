@@ -1,0 +1,130 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.18",
+    ax_sha256: "b48a773f39e37bb6ab3d65da3acd44d04863d702e3d736abd5ccd91bb561458a"
+  ),
+
+  includes: [
+    "database/plus2.17.ron"
+  ],
+
+  variable_groups: {
+    "chara_bit": (
+      variables:
+      [
+        ( name: "CHARA_BIT_SHADOW_CLONE", value: 1035 ),
+      ]
+    ),
+    "chara_tier": (
+      variables: [
+        ( name: "CHARACTER_TIER_SHIP_HULL_ENDURANCE", value: 5 ),
+      ]
+    ),
+    "gdata": (
+      variables: [
+        (
+          name: "GDATA_FLAG_SHIP_TYPE",
+          value: 694,
+          code_value: "STARTING_GDATA_FLAG + 444"
+        ),
+        (
+          name: "GDATA_FLAG_SHIP_IMAGE",
+          value: 695,
+          code_value: "STARTING_GDATA_FLAG + 445"
+        ),
+        (
+          name: "GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH",
+          value: 696,
+          code_value: "STARTING_GDATA_FLAG + 446"
+        ),
+        (
+          name: "GDATA_FLAG_SHIP_LAST_PORT",
+          value: 697,
+          code_value: "STARTING_GDATA_FLAG + 447"
+        ),
+      ]
+    ),
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_DEED_OF_SUBMARINE", value: 1276 ),
+        ( name: "ITEM_ID_DEED_OF_WARSHIP", value: 1277 ),
+        ( name: "ITEM_ID_DEED_OF_CRUISE_SHIP", value: 1278 ),
+        ( name: "ITEM_ID_DEED_OF_PIRATE_SHIP", value: 1279 ),
+        ( name: "ITEM_ID_DEED_OF_FISHING_SHIP", value: 1280 ),
+        ( name: "ITEM_ID_DEED_OF_HUGE_RAFT", value: 1281 ),
+        ( name: "ITEM_ID_WAKAME", value: 1282 ),
+        ( name: "ITEM_ID_KOMBU", value: 1283 ),
+        ( name: "ITEM_ID_MOZUKU", value: 1284 ),
+        ( name: "ITEM_ID_HOTATE", value: 1285 ),
+        ( name: "ITEM_ID_HAMAGURI", value: 1286 ),
+        ( name: "ITEM_ID_SAZAE", value: 1287 ),
+
+        ( name: "MAX_ITEM_ID", value: 1278, code_value: "ITEM_ID_WHITE_DARK_ORB + 3", exclude: true ),
+      ],
+    ),
+    "filter_item": (
+      variables: [
+        ( name: "FILTER_JUNK_SEABED", value: 64101 ),
+        ( name: "FILTER_ENVIRONMENT_SEABED", value: 80001 ),
+      ]
+    ),
+    "skill_effect": (
+      variables: [
+        (
+          name: "SKILL_EFFECT_SHIP_DEED",
+          value: 1175,
+          code_value: "SKILL_EFFECT_MIN + 75"
+        )
+      ]
+    ),
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_SHADOW_JUMP", value: 852, ),
+        ( name: "SKILL_SPACT_SHADOW_HOP", value: 853, ),
+
+        ( name: "MAX_SKILL", value: 854, code_value: "SKILL_SPACT_SHADOW_HOP + 1" ),
+      ]
+    ),
+    "music_id": (
+      variables: [
+        ( name: "MUSICLIST_MCOCEANDAY", value: 136 ),
+        ( name: "MUSICLIST_MCOCEANNIGHT", value: 137 ),
+
+        ( name: "MUSICLIST_SCENE_MUSIC", value: 138 ),
+        ( name: "MUSICLIST_MAX", value: 139, code_value: "MUSICLIST_SCENE_MUSIC + 1" ),
+      ]
+    ),
+    "sound_id": (
+      variables: [
+        ( name: "SOUNDLIST_UMINADO", value: 304 ),
+        ( name: "SOUNDLIST_MIZU2", value: 305 ),
+      ]
+    ),
+  },
+
+  arrays: {},
+
+  expressions: {},
+
+  functions: {
+  },
+
+  labels: {
+    "*com_jukebox": (
+      rules: [
+        (
+          kind: Function,
+          match: "repeat 139 - 50 - 1, 50"
+        )
+      ]
+    ),
+    "*com_jukebox_loop_pgchk": (
+      after: "*com_jukebox"
+    ),
+  },
+
+  files: {}
+)
