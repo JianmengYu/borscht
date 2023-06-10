@@ -1,0 +1,48 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.18R",
+    ax_sha256: "e7674cf868f6fa91a2f7430c57c132610a7c7e9dd8da3eb8a52d591d718c5a73"
+  ),
+
+  includes: [
+    "database/plus2.18.ron"
+  ],
+
+  variable_groups: {
+    "area_id": (
+      variables: [
+        ( name: "AREA_OCEAN", value: 47, override: true ),
+      ],
+    ),
+    "buff_id": (
+      variables: [
+        ( name: "BUFF_CHAIN_OF_MANA", value: 68, override: true ),
+        ( name: "BUFF_FLAME_OF_LIFE", value: 69 ),
+
+        ( name: "MAX_BUFF", value: 70, code_value: "BUFF_FLAME_OF_LIFE + 1" ),
+      ]
+    ),
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_ACCEL_NECRO", value: 854, override: true ),
+
+        ( name: "MAX_SKILL", value: 855, code_value: "SKILL_SPACT_ACCEL_NECRO + 1" ),
+      ]
+    ),
+  },
+
+  arrays: {},
+
+  expressions: {},
+
+  functions: {
+  },
+
+  labels: {
+  },
+
+  files: {}
+)
