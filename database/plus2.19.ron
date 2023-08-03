@@ -90,6 +90,26 @@ AnalysisConfig(
         ),
       ]
     ),
+    "rf_id": (
+      variables: [
+        ( name: "RF_DEBUFF_POTION", value: 9029, code_value: "EXT_RF + 29", override: true ),
+
+        ( name: "MAX_RF", value: 9030, code_value: "RF_DEBUFF_POTION + 1" ),
+      ]
+    ),
+    "random_event": (
+      variables: [
+        ( name: "RANDOM_EVENT_SEA_RAGING_SEA", value: 47 ),
+        ( name: "RANDOM_EVENT_SEA_SWEPT_AWAY", value: 48 ),
+        ( name: "RANDOM_EVENT_SEA_AFTER_ESCAPE", value: 49 ),
+        ( name: "RANDOM_EVENT_SEA_DRIFTERS", value: 50 ),
+        ( name: "RANDOM_EVENT_SEA_AERIAL_THREAT", value: 51 ),
+        ( name: "RANDOM_EVENT_SEA_UNDERSEA_THREAT", value: 52 ),
+        ( name: "RANDOM_EVENT_SHIP", value: 53 ),
+        ( name: "RANDOM_EVENT_DRIFTER", value: 54 ),
+        ( name: "RANDOM_EVENT_BIG_CATCH", value: 55 ),
+      ]
+    ),
   },
 
   labels: {
@@ -1217,12 +1237,12 @@ AnalysisConfig(
     "*db_creature_ALIEN": ( after: "*db_creature_GOLD_BELL", loop_kind: SwitchEnd ),
     "*db_creature_usernpc": ( after: "*db_creature_ALIEN", loop_kind: SwitchEnd ),
     
-    "*db_item_POTION_PHYSICAL": ( after: "*db_item", loop_kind: SwitchEnd ),
-    "*db_item_POTION_CALAMITY": ( after: "*db_item_POTION_PHYSICAL", loop_kind: SwitchEnd ),
-    "*db_item_POTION_AGONY": ( after: "*db_item_POTION_CALAMITY", loop_kind: SwitchEnd ),
-    "*db_item_SCROLL_ATTRACT": ( after: "*db_item_POTION_AGONY", loop_kind: SwitchEnd ),
-    "*db_item_SCROLL_HARVEST": ( after: "*db_item_SCROLL_ATTRACT", loop_kind: SwitchEnd ),
-    "*db_item_HAMAGURI": ( after: "*db_item_SCROLL_HARVEST", loop_kind: SwitchEnd ),
+    "*db_item_SCROLL_ATTRACT": ( after: "*db_item", loop_kind: SwitchEnd ),
+    "*db_item_POTION_AGONY": ( after: "*db_item_SCROLL_ATTRACT", loop_kind: SwitchEnd ),
+    "*db_item_POTION_CALAMITY": ( after: "*db_item_POTION_AGONY", loop_kind: SwitchEnd ),
+    "*db_item_POTION_PHYSICAL": ( after: "*db_item_POTION_CALAMITY", loop_kind: SwitchEnd ),
+    "*db_item_SAZAE": ( after: "*db_item_POTION_PHYSICAL", loop_kind: SwitchEnd ),
+    "*db_item_HAMAGURI": ( after: "*db_item_SAZAE", loop_kind: SwitchEnd ),
     "*db_item_HOTATE": ( after: "*db_item_HAMAGURI", loop_kind: SwitchEnd ),
     "*db_item_MOZUKU": ( after: "*db_item_HOTATE", loop_kind: SwitchEnd ),
     "*db_item_KOMBU": ( after: "*db_item_MOZUKU", loop_kind: SwitchEnd ),
