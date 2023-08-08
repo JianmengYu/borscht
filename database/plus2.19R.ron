@@ -1,0 +1,45 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.19R",
+    ax_sha256: "c93cea8d592142f1331399b84266ae97106d635824a8a04b927f484ea5320aa3"
+  ),
+
+  includes: [
+    "database/plus2.19.ron"
+  ],
+
+  variable_groups: {
+    "cdata": (
+      variables: [
+        ( name: "CDATA_HEART_LOCK_RELATION", value: 441, override: true ),
+      ]
+    ),
+  },
+
+  arrays: {},
+
+  expressions: {},
+
+  functions: {
+  },
+
+  labels: {
+    "*expMagicDevice": (
+      rules: [
+        (
+          kind: If,
+          match: "if ( tc != (-1) ) {"
+        ),
+        (
+          kind: Function,
+          match: "skillexp SKILL_NORMAL_MAGIC_DEVICE, cc, 50"
+        )
+      ]
+    ),
+  },
+
+  files: {}
+)
