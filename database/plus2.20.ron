@@ -1,0 +1,178 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.20",
+    ax_sha256: "a9952301720cf846252e3c99e92b43161c9fee2aaa66d32e9e43c1c73e2cc1b8"
+  ),
+
+  includes: [
+    "database/plus2.19R.ron"
+  ],
+
+  variable_groups: {
+    "adata": (
+      variables: [
+        ( name: "ADATA_LABOR_CAMP_TOIL_ENERGY", value: 37 ),
+        ( name: "ADATA_LABOR_CAMP_TOIL_LEVEL", value: 38 ),
+      ]
+    ),
+
+    "action_1": (
+      variables: [
+        ( name: "ACTION_SLAVE_SPINNER", value: 107, ),
+        ( name: "ACTION_SLAVE_WHEEL", value: 108, ),
+      ]
+    ),
+
+    "animation_id": (
+      variables: [
+        ( name: "ANIMATION_GOD_CHARGE_ROD", value: 64 ),
+      ]
+    ),
+
+    "area_id": (
+      variables: [
+        ( name: "AREA_CAMP", value: 105, override: true ),
+      ],
+      ignore: [ 800, 900 ]
+    ),
+
+    "chara_id": (
+      variables: [
+        ( name: "CREATURE_ID_WANDERER_OF_ELEA", value: 1082 ),
+        ( name: "CREATURE_ID_AVENGER_OF_ELEA", value: 1083 ),
+        ( name: "CREATURE_ID_MOB_OF_ELEA", value: 1084 ),
+        ( name: "CREATURE_ID_INSTIGATOR_OF_ELEA", value: 1085 ),
+        ( name: "CREATURE_ID_PIRATE_MUSKETEER", value: 1086 ),
+        ( name: "CREATURE_ID_ROUGH_PIRATE", value: 1087 ),
+        ( name: "CREATURE_ID_BOUNCTERIA", value: 1088 ),
+        ( name: "CREATURE_ID_MESHERA_UNFINISHED", value: 1089 ),
+        ( name: "CREATURE_ID_MONSTER_BACTERIA", value: 1090 ),
+        ( name: "CREATURE_ID_ANABOLIC_RESISTANCE", value: 1091 ),
+
+        ( name: "MAX_CREATURE_ID", value: 1094, code_value: "CREATURE_ID_ANABOLIC_RESISTANCE + 3" ),
+      ]
+    ),
+
+    "chara_bit": (
+      variables: [
+        ( name: "CHARA_BIT_LOCKED_UP", value: 1040 ),
+        ( name: "CHARA_BIT_LABOR_CAMP", value: 1041 ),
+      ]
+    ),
+
+    "cdata": (
+      variables: [
+        ( name: "CDATA_PREGNANCY_PROGRESS", value: 42, override: true, macro: "cSPearned" ),
+        ( name: "CDATA_GUARD_BREAK", value: 60, macro: "cDrainHP" ),
+        ( name: "CDATA_PREGNANCY_FEMALE_CHILD", value: 213, override: true ),
+        ( name: "CDATA_PREGNANCY_MALE_CHILD", value: 187, override: true ),
+      ]
+    ),
+
+    "encounter": (
+      variables: [
+        ( name: "ENCOUNTER_ELEA_REPARATION", value: 8 ),
+      ]
+    ),
+
+    "event": (
+      variables: [
+        ( name: "EVENT_ELEA_REPARATION", value: 97 ),
+      ]
+    ),
+    
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_SLAVE_WHEEL", value: 1293 ),
+        ( name: "ITEM_ID_SLAVE_SPINNER", value: 1294 ),
+        ( name: "ITEM_ID_FLOAT_CAGE", value: 1295 ),
+        ( name: "ITEM_ID_DEED_CAMP", value: 1296 ),
+
+        ( name: "MAX_ITEM_ID", value: 1299, code_value: "ITEM_ID_DEED_CAMP + 3", exclude: true ),
+      ],
+    ),
+    "item_effect": (
+      variables: [
+        ( name: "EFFECT_FLOAT_CAGE", value: 146 ),
+        ( name: "EFFECT_SLAVE_SPINNER", value: 147 ),
+        ( name: "EFFECT_SLAVE_WHEEL", value: 148 ),
+      ]
+    ),
+    
+    "inv": (
+      variables: [
+        ( name: "INV_ITEM_PARTS", value: 32, override: true ),
+      ]
+    ),
+
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_GOD_CHARGE_ROD", value: 855, override: true ),
+
+        ( name: "MAX_SKILL", value: 856, code_value: "SKILL_SPACT_GOD_CHARGE_ROD + 1" ),
+      ]
+    ),
+  },
+
+  arrays: {},
+
+  expressions: {},
+
+  functions: {
+    "txtsetwlevel": (
+      args: {
+        0: (name: "count", type: Int)
+      }
+    ),
+    "txtsetwpoint": (
+      args: {
+        0: (name: "count", type: Int)
+      }
+    ),
+  },
+
+  labels: {
+    
+    "*com_home_WEND3": (
+      after: "*com_home_WHILE3",
+      loop_kind: SwitchEnd
+    ),
+    "*com_home_WEND2": (
+      after: "*com_home_WEND3",
+      loop_kind: WhileEnd
+    ),
+    "*com_home_WBREAK": (
+      after: "*com_home_WEND2",
+      loop_kind: WhileEnd
+    ),
+    "*com_home_SWEND1": (
+      after: "*com_home_WBREAK",
+      loop_kind: WhileEnd
+    ),
+
+    "*db_creature_MONSTER_BACTERIA": ( after: "*db_creature", loop_kind: SwitchEnd ),
+    "*db_creature_MESHERA_UNFINISHED": ( after: "*db_creature_MONSTER_BACTERIA", loop_kind: SwitchEnd ),
+    "*db_creature_BOUNCTERIA": ( after: "*db_creature_MESHERA_UNFINISHED", loop_kind: SwitchEnd ),
+    "*db_creature_ROUGH_PIRATE": ( after: "*db_creature_BOUNCTERIA", loop_kind: SwitchEnd ),
+    "*db_creature_PIRATE_MUSKETEER": ( after: "*db_creature_ROUGH_PIRATE", loop_kind: SwitchEnd ),
+    "*db_creature_INSTIGATOR_OF_ELEA": ( after: "*db_creature_PIRATE_MUSKETEER", loop_kind: SwitchEnd ),
+    "*db_creature_MOB_OF_ELEA": ( after: "*db_creature_INSTIGATOR_OF_ELEA", loop_kind: SwitchEnd ),
+    "*db_creature_AVENGER_OF_ELEA": ( after: "*db_creature_MOB_OF_ELEA", loop_kind: SwitchEnd ),
+    "*db_creature_WANDERER_OF_ELEA": ( after: "*db_creature_AVENGER_OF_ELEA", loop_kind: SwitchEnd ),
+    // These 2 entries override previous labels
+    "*db_creature_CHAOSHAPRINCESS_ZEHLS": ( after: "*db_creature_WANDERER_OF_ELEA", loop_kind: SwitchEnd ),
+    "*db_creature_CHAOSHAPRINCESS_DIBWL": ( after: "*db_creature_CHAOSHAPRINCESS_ZEHLS", loop_kind: SwitchEnd ),
+
+    "*db_item_FLOAT_CAGE": ( after: "*db_item", loop_kind: SwitchEnd ),
+    "*db_item_SLAVE_SPINNER": ( after: "*db_item_FLOAT_CAGE", loop_kind: SwitchEnd ),
+    "*db_item_SLAVE_WHEEL": ( after: "*db_item_SLAVE_SPINNER", loop_kind: SwitchEnd ),
+    // These 2 entries override previous labels
+    "*db_item_SCROLL_HARVEST": ( after: "*db_item_SLAVE_WHEEL", loop_kind: SwitchEnd ),
+    "*db_item_SCROLL_ATTRACT": ( after: "*db_item_SCROLL_HARVEST", loop_kind: SwitchEnd ),
+  },
+
+  files: {}
+)
