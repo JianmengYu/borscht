@@ -1,0 +1,201 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.21",
+    ax_sha256: "200743772743d4ed77bf1edb93f5778d66f82eb0c6bf6970895da47d27a58cb0"
+  ),
+
+  includes: [
+    "database/plus2.20.ron"
+  ],
+  
+  variable_groups: {
+
+    "action_1": (
+      variables: [
+        ( name: "ACTION_JUMPING_DROP", value: 30, ),
+        ( name: "ACTION_DIVING_DRILL", value: 31, ),
+      ]
+    ),
+
+    "buff_id": (
+      variables: [
+        ( name: "BUFF_ENERGY_MAX", value: 70 ),
+
+        ( name: "MAX_BUFF", value: 71, code_value: "BUFF_ENERGY_MAX + 1" ),
+      ]
+    ),
+
+    "chara_id": (
+      variables: [
+        ( name: "CREATURE_ID_MEGA_GORDIAN_WORM", value: 1092 ),
+        ( name: "CREATURE_ID_HEAL_WORM", value: 1093 ),
+        ( name: "CREATURE_ID_DEATH_WORDM", value: 1094 ),
+        ( name: "CREATURE_ID_VINDALIAN_DEATHWORM", value: 1095 ),
+        ( name: "CREATURE_ID_WORM_HOLER", value: 1096 ),
+
+        ( name: "CREATURE_ID_LANDMINE_GIRL", value: 1097 ),
+        ( name: "CREATURE_ID_SCATTER_LANDMINE_GIRL", value: 1098 ),
+        ( name: "CREATURE_ID_JUMP_LANDMINE_GIRL", value: 1099 ),
+        ( name: "CREATURE_ID_ANTITANK_LANDMINE_GIRL", value: 1100 ),
+
+        ( name: "CREATURE_ID_BAMBOO_SPEAR_SPIRIT", value: 1101 ),
+
+        ( name: "MAX_CREATURE_ID", value: 1104, code_value: "CREATURE_ID_BAMBOO_SPEAR_SPIRIT + 3" ),
+      ]
+    ),
+
+    "chara_bit": (
+      variables: [
+        ( name: "CHARA_BIT_TOIL_ENERGY_DRINK", value: 1042 ),
+      ]
+    ),
+
+    "cell_sub_feature": (
+      variables: [
+        ( name: "CELL_SUB_FEATURE_TRAP_QUEST_MINE_2", value: 15 ),
+        ( name: "CELL_SUB_FEATURE_TRAP_QUEST_PITFALL_2", value: 16 ),
+      ],
+    ),
+
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_SPLENDID_CHAIN", value: 1297 ),
+        ( name: "ITEM_ID_TOIL_ENERGY_DRINK", value: 1298 ),
+
+        ( name: "MAX_ITEM_ID", value: 1301, code_value: "ITEM_ID_TOIL_ENERGY_DRINK + 3", exclude: true ),
+      ],
+    ),
+
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_JUMPING_DROP", value: 856, override: true ),
+        ( name: "SKILL_SPACT_DIVING_DRILL", value: 857 ),
+
+        ( name: "MAX_SKILL", value: 858, code_value: "SKILL_SPACT_DIVING_DRILL + 1" ),
+      ]
+    ),
+    "skill_effect": (
+      variables: [
+        (
+          name: "SKILL_EFFECT_ENERGY_MAX",
+          value: 1180,
+          code_value: "SKILL_EFFECT_MIN + 80"
+        ),
+      ]
+    ),
+
+    "sound_id": (
+      variables: [
+        ( name: "SOUNDLIST_BURST00", value: 306 ),
+        ( name: "SOUNDLIST_GORO05", value: 307 ),
+        ( name: "SOUNDLIST_MECHA15", value: 308 ),
+      ]
+    ),
+  },
+
+  labels: {
+    
+    "*expCasting": (
+      rules: [
+        (
+          kind: Function,
+          match: "skillexp r2, r1, (sdataref(SKILL_DATAREF_COST, r2) + 10) * 2, 5"
+        )
+      ]
+    ),
+
+    "*calcLevelUp": (
+      rules: [
+        (
+          kind: Assignment,
+          match: "cdata(CDATA_EXP, r1) -= cdata(CDATA_EXP_TO_NEXT_LVL, r1)"
+        )
+      ]
+    ),
+    
+    "*com_product": (
+      rules: [
+        (
+          kind: If,
+          match: "if ( dbg_toolversatile != 1 ) {"
+        )
+      ]
+    ),
+
+    "*cm_confirm": (
+      after: "*cm_gamemode"
+    ),
+    "*cm_birth": (
+      after: "*cm_confirm"
+    ),
+    "*com_change_gamemode": (
+      after: "*chat_unique_leold_limb"
+    ),
+    "*screen_ocean": (
+      after: "*screen_snow"
+    ),
+    "*screen_hardRain": (
+      after: "*screen_rain"
+    ),
+    "*individual_leading": (
+      after: "*effect_heal"
+    ),
+    "*perform_begging": (
+      after: "*perform_dance"
+    ),
+    "*row_act_work": (
+      rules: [
+        (
+          kind: Assignment,
+          match: "seikou = 1"
+        )
+      ]
+    ),
+
+    "*skill_jumping_drop": (
+      rules: [
+        (
+          kind: Assignment,
+          match: "cdata(CDATA_ROW_ACT, cc) = ACTION_JUMPING_DROP"
+        )
+      ]
+    ),
+    "*skill_diving_drill": (
+      rules: [
+        (
+          kind: Assignment,
+          match: "cdata(CDATA_ROW_ACT, cc) = ACTION_DIVING_DRILL"
+        )
+      ]
+    ),
+    "*eatHealWorm": (
+      rules: [
+        (
+          kind: StringLiteral,
+          match: "の病気は軽くなった。"
+        )
+      ]
+    ),
+
+    "*db_creature_ANTITANK_LANDMINE_GIRL": ( after: "*db_creature", loop_kind: SwitchEnd ),
+    "*db_creature_JUMP_LANDMINE_GIRL": ( after: "*db_creature_ANTITANK_LANDMINE_GIRL", loop_kind: SwitchEnd ),
+    "*db_creature_SCATTER_LANDMINE_GIRL": ( after: "*db_creature_JUMP_LANDMINE_GIRL", loop_kind: SwitchEnd ),
+    "*db_creature_LANDMINE_GIRL": ( after: "*db_creature_SCATTER_LANDMINE_GIRL", loop_kind: SwitchEnd ),
+    "*db_creature_WORM_HOLER": ( after: "*db_creature_LANDMINE_GIRL", loop_kind: SwitchEnd ),
+    "*db_creature_VINDALIAN_DEATHWORM": ( after: "*db_creature_WORM_HOLER", loop_kind: SwitchEnd ),
+    "*db_creature_DEATH_WORDM": ( after: "*db_creature_VINDALIAN_DEATHWORM", loop_kind: SwitchEnd ),
+    "*db_creature_HEAL_WORM": ( after: "*db_creature_DEATH_WORDM", loop_kind: SwitchEnd ),
+    "*db_creature_MEGA_GORDIAN_WORM": ( after: "*db_creature_HEAL_WORM", loop_kind: SwitchEnd ),
+    // These 2 entries are from previous databases, override previous labels
+    "*db_creature_ANABOLIC_RESISTANCE": ( after: "*db_creature_MEGA_GORDIAN_WORM", loop_kind: SwitchEnd ),
+    "*db_creature_MONSTER_BACTERIA": ( after: "*db_creature_ANABOLIC_RESISTANCE", loop_kind: SwitchEnd ),
+
+    "*db_item_SPLENDID_CHAIN": ( after: "*db_item", loop_kind: SwitchEnd ),
+    // These 2 entries are from previous databases, override previous labels
+    "*db_item_DEED_CAMP": ( after: "*db_item_SPLENDID_CHAIN", loop_kind: SwitchEnd ),
+    "*db_item_FLOAT_CAGE": ( after: "*db_item_DEED_CAMP", loop_kind: SwitchEnd ),
+  },
+)

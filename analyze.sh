@@ -34,8 +34,10 @@ set -e
 # cargo run --release -- analyze -s -o ../elonaplus_sources/2.19-borscht ../elonaplus2.19/start.ax
 # cargo run --release -- unpack ../elonaplus2.19R/elonaplus.exe
 # cargo run --release -- analyze -s -o ../elonaplus_sources/2.19R-borscht ../elonaplus2.19R/start.ax
-cargo run --release -- unpack ../elonaplus2.20/elonaplus.exe
-cargo run --release -- analyze -s -o ../elonaplus_sources/2.20-borscht ../elonaplus2.20/start.ax
+# cargo run --release -- unpack ../elonaplus2.20/elonaplus.exe
+# cargo run --release -- analyze -s -o ../elonaplus_sources/2.20-borscht ../elonaplus2.20/start.ax
+cargo run --release -- unpack ../elonaplus2.21/elonaplus.exe
+cargo run --release -- analyze -s -o ../elonaplus_sources/2.21-borscht ../elonaplus2.21/start.ax
 
 # cargo run --release -- print-vars database/plus1.90.ron > ../elonaplus_sources/defines/1.90.hsp
 # cargo run --release -- print-vars database/plus2.05.ron > ../elonaplus_sources/defines/2.05.hsp
@@ -56,12 +58,13 @@ cargo run --release -- analyze -s -o ../elonaplus_sources/2.20-borscht ../elonap
 # cargo run --release -- print-vars database/plus2.18R.ron > ../elonaplus_sources/defines/2.18R.hsp
 # cargo run --release -- print-vars database/plus2.19.ron > ../elonaplus_sources/defines/2.19.hsp
 # cargo run --release -- print-vars database/plus2.19R.ron > ../elonaplus_sources/defines/2.19R.hsp
-cargo run --release -- print-vars database/plus2.20.ron > ../elonaplus_sources/defines/2.20.hsp
+# cargo run --release -- print-vars database/plus2.20.ron > ../elonaplus_sources/defines/2.20.hsp
+cargo run --release -- print-vars database/plus2.21.ron > ../elonaplus_sources/defines/2.21.hsp
 
 unix2dos ../elonaplus_sources/defines/*.hsp
 
 cd ../elonaplus_sources/defines/
-diff -U5 --recursive '-I\*label_' ./2.19R.hsp ./2.20.hsp | unix2dos > a.diff
+diff -U5 --recursive '-I\*label_' ./2.20.hsp ./2.21.hsp | unix2dos > a.diff
 
 set +e
 
@@ -86,7 +89,8 @@ cd ../
 # unix2dos ../elonaplus_sources/2.18R-borscht/*.hsp
 # unix2dos ../elonaplus_sources/2.19-borscht/*.hsp
 # unix2dos ../elonaplus_sources/2.19R-borscht/*.hsp
-unix2dos ../elonaplus_sources/2.20-borscht/*.hsp
+# unix2dos ../elonaplus_sources/2.20-borscht/*.hsp
+unix2dos ../elonaplus_sources/2.21-borscht/*.hsp
 
 cd ./diff/
 pushd ../elonaplus_sources/diff
@@ -131,9 +135,12 @@ pushd ../elonaplus_sources/diff
 # diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.19-borscht/ ../2.19R-borscht/ | unix2dos > 2.19-to-2.19R.diff
 # diff -U5 --recursive '-I\*label_' ../2.19-borscht/db_item.hsp ../2.19R-borscht/db_item.hsp | unix2dos > 2.19-to-2.19R.db_item.diff
 # diff -U5 --recursive '-I\*label_' ../2.19-borscht/db_creature.hsp ../2.19R-borscht/db_creature.hsp | unix2dos > 2.19-to-2.19R.db_creature.diff
-diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.19R-borscht/ ../2.20-borscht/ | unix2dos > 2.19R-to-2.20.diff
-diff -U5 --recursive '-I\*label_' '-b' ../2.19R-borscht/db_item.hsp ../2.20-borscht/db_item.hsp | unix2dos > 2.19R-to-2.20.db_item.diff
-diff -U5 --recursive '-I\*label_' '-Ifilter_creature'  ../2.19R-borscht/db_creature.hsp ../2.20-borscht/db_creature.hsp | unix2dos > 2.19R-to-2.20.db_creature.diff
+# diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.19R-borscht/ ../2.20-borscht/ | unix2dos > 2.19R-to-2.20.diff
+# diff -U5 --recursive '-I\*label_' '-b' ../2.19R-borscht/db_item.hsp ../2.20-borscht/db_item.hsp | unix2dos > 2.19R-to-2.20.db_item.diff
+# diff -U5 --recursive '-I\*label_' '-Ifilter_creature'  ../2.19R-borscht/db_creature.hsp ../2.20-borscht/db_creature.hsp | unix2dos > 2.19R-to-2.20.db_creature.diff
+diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.20-borscht/ ../2.21-borscht/ | unix2dos > 2.20-to-2.21.diff
+diff -U5 --recursive '-I\*label_' '-b' ../2.20-borscht/db_item.hsp ../2.21-borscht/db_item.hsp | unix2dos > 2.20-to-2.21.db_item.diff
+diff -U5 --recursive '-I\*label_' '-Ifilter_creature'  ../2.20-borscht/db_creature.hsp ../2.21-borscht/db_creature.hsp | unix2dos > 2.20-to-2.21.db_creature.diff
 git status
 # git add ../1.90-borscht ../2.05-borscht ../2.06-borscht ../2.06fix-borscht
 # git add ../2.07-borscht
