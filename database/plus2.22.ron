@@ -1,0 +1,80 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.22",
+    ax_sha256: "00b978f018176821dd4910533fb6cbfe5939e5559d4033f3e915bf3f4e2fa740"
+  ),
+
+  includes: [
+    "database/plus2.21.ron"
+  ],
+  
+  variable_groups: {
+
+    "chara_id": (
+      variables: [
+        ( name: "CREATURE_ID_RESTOROID_DODO", value: 1102 ),
+        ( name: "CREATURE_ID_RESTOROID_GAREFOWL", value: 1103 ),
+        ( name: "CREATURE_ID_RESTOROID_PASSENGER_PIGEON", value: 1104 ),
+        ( name: "CREATURE_ID_RESTOROID_TOKI", value: 1105 ),
+        ( name: "CREATURE_ID_RESTOROID_SEA_COW", value: 1106 ),
+        ( name: "CREATURE_ID_RESTOROID_GOAT", value: 1107 ),
+        ( name: "CREATURE_ID_RESTOROID_MEGA_KANGAROO", value: 1108 ),
+        ( name: "CREATURE_ID_RESTOROID_GIANT_PANDA", value: 1109 ),
+        ( name: "CREATURE_ID_RESTOROID_DIRE_WOLF", value: 1110 ),
+        ( name: "CREATURE_ID_RESTOROID_SABER_TIGER", value: 1111 ),
+        ( name: "CREATURE_ID_RESTOROID_KAPPA", value: 1112 ),
+        
+        ( name: "MAX_CREATURE_ID", value: 1115, code_value: "CREATURE_ID_RESTOROID_KAPPA + 3" ),
+      ]
+    ),
+    
+    "trait_ether": (
+      variables: [
+        ( name: "TRAIT_ETHER_SLEEPINESS", value: 228, override: true ),
+
+        ( name: "MAX_TRAIT_ETHER", value: 229, exclude: true ),
+      ]
+    ),
+    "trait": (
+      variables: [
+        ( name: "MAX_TRAIT", value: 229, code_value: "MAX_TRAIT_ETHER" ),
+      ]
+    ),
+
+    "chara_bit": (
+      variables: [
+        ( name: "CHARA_BIT_EXCLUSIVE_SKILL_CHARGE", value: 974, override: true ),
+        ( name: "CHARA_BIT_QUICK_RESTORE", value: 1043 ),
+      ]
+    ),
+  },
+
+  functions: {
+    "_yamero": (
+      args: {
+        0: (name: "arg1", type: Int),
+      }
+    ),
+  },
+
+  labels: {
+    "*db_creature_RESTOROID_SABER_TIGER": ( after: "*db_creature", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_DIRE_WOLF": ( after: "*db_creature_RESTOROID_SABER_TIGER", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_GIANT_PANDA": ( after: "*db_creature_RESTOROID_DIRE_WOLF", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_MEGA_KANGAROO": ( after: "*db_creature_RESTOROID_GIANT_PANDA", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_GOAT": ( after: "*db_creature_RESTOROID_MEGA_KANGAROO", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_SEA_COW": ( after: "*db_creature_RESTOROID_GOAT", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_TOKI": ( after: "*db_creature_RESTOROID_SEA_COW", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_PASSENGER_PIGEON": ( after: "*db_creature_RESTOROID_TOKI", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_GAREFOWL": ( after: "*db_creature_RESTOROID_PASSENGER_PIGEON", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_DODO": ( after: "*db_creature_RESTOROID_GAREFOWL", loop_kind: SwitchEnd ),
+
+    // These 2 entries are from previous databases, override previous labels
+    "*db_creature_BAMBOO_SPEAR_SPIRIT": ( after: "*db_creature_RESTOROID_DODO", loop_kind: SwitchEnd ),
+    "*db_creature_ANTITANK_LANDMINE_GIRL": ( after: "*db_creature_BAMBOO_SPEAR_SPIRIT", loop_kind: SwitchEnd ),
+
+  },
+)

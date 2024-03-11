@@ -66,7 +66,7 @@ AnalysisConfig(
     "cdata": (
       variables: [
         ( name: "CDATA_PREGNANCY_PROGRESS", value: 42, override: true, macro: "cSPearned" ),
-        ( name: "CDATA_GUARD_BREAK", value: 60, macro: "cDrainHP" ),
+        ( name: "CDATA_GUARD_BREAK", value: 60, macro: "cDrainHP", override: true ),
         ( name: "CDATA_PREGNANCY_FEMALE_CHILD", value: 213, override: true ),
         ( name: "CDATA_PREGNANCY_MALE_CHILD", value: 187, override: true ),
       ]
