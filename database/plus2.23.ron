@@ -1,0 +1,122 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.23",
+    ax_sha256: "884bb53276b6fc15a6bc2a5adb1cb4ad7184c9f4fbfd92ad791b409a876b30e5"
+  ),
+
+  includes: [
+    "database/plus2.22.ron"
+  ],
+  
+  variable_groups: {
+
+    "chara_id": (
+      variables: [
+        ( name: "CREATURE_ID_KAMIORIDURU", value: 1113 ),
+        ( name: "CREATURE_ID_KAMISHURIKEN", value: 1114 ),
+        ( name: "CREATURE_ID_KAMIHIKOUKI", value: 1115 ),
+        
+        ( name: "MAX_CREATURE_ID", value: 1118, code_value: "CREATURE_ID_KAMIHIKOUKI + 3" ),
+      ]
+    ),
+
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_POTION_PLUG", value: 1299 ),
+
+        ( name: "MAX_ITEM_ID", value: 1302, code_value: "ITEM_ID_POTION_PLUG + 3", exclude: true ),
+      ],
+    ),
+
+    
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_SAINT_BLADE", value: 858, override: true ),
+        ( name: "SKILL_SPACT_PURIFICATION", value: 859 ),
+        ( name: "SKILL_SPACT_ANGEL_HALO", value: 860 ),
+        ( name: "SKILL_SPACT_REPRIMAND", value: 861 ),
+        ( name: "SKILL_SPACT_SHIKIORIGAMI_CRANE", value: 862 ),
+        ( name: "SKILL_SPACT_SHIKIORIGAMI_SHURIKEN", value: 863 ),
+        ( name: "SKILL_SPACT_SHIKIORIGAMI_AIRPLANE", value: 864 ),
+
+        ( name: "MAX_SKILL", value: 865, code_value: "SKILL_SPACT_SHIKIORIGAMI_AIRPLANE + 1" ),
+      ]
+    ),
+
+    "damage_source": (
+      variables: [
+        ( name: "DAMAGE_FROM_REMNANT", value: -34, ),
+      ]
+    ),
+
+    "trait_normal": (
+      variables: [
+        ( name: "TRAIT_NORMAL_SPACT_SAINT", value: 17, override: true ),
+        ( name: "TRAIT_NORMAL_DISCERNMENT", value: 8, override: true ),
+        ( name: "TRAIT_NORMAL_SPACT_SHIKI_ORIGAMI", value: 10, override: true ),
+      ]
+    ),
+
+    "cdata": (
+      variables: [
+        ( name: "CDATA_FIELD_EFFECT", value: 85 ),
+      ]
+    ),
+
+    "gdata": (
+      variables: [
+        ( name: "GDATA_PRESERVE_PIETY", value: 187, macro: "gGodDetect", override: true ),
+      ]
+    ),
+
+    "god_text": (
+      variables: [
+        ( name: "GOD_TEXT_DREAM", value: 0 ),
+      ]
+    ),
+
+    "enchant_id": (
+      variables: [
+        ( name: "ENCHANT_PRESERVE_PIETY", value: 59, override: true ),
+      ]
+    ),
+
+    "mef_type": (
+      variables: [
+        ( name: "MEF_TYPE_REMNANT_FIRE", value: 13 ),
+        ( name: "MEF_TYPE_REMNANT_COLD", value: 14 ),
+        ( name: "MEF_TYPE_REMNANT_LIGHTNING", value: 15 ),
+        ( name: "MEF_TYPE_REMNANT_DARKNESS", value: 16 ),
+        ( name: "MEF_TYPE_REMNANT_MIND", value: 17 ),
+        ( name: "MEF_TYPE_REMNANT_POISON", value: 18 ),
+        ( name: "MEF_TYPE_REMNANT_NETHER", value: 19 ),
+        ( name: "MEF_TYPE_REMNANT_SOUND", value: 20 ),
+        ( name: "MEF_TYPE_REMNANT_NERVE", value: 21 ),
+        ( name: "MEF_TYPE_REMNANT_CHAOS", value: 22 ),
+        ( name: "MEF_TYPE_REMNANT_MAGIC", value: 23 ),
+      ]
+    ),
+  },
+
+  functions: {
+    "txttargetsex": (
+      args: {}
+    ),
+  },
+
+  labels: {
+    "*db_creature_KAMISHURIKEN": ( after: "*db_creature", loop_kind: SwitchEnd ),
+    "*db_creature_KAMIORIDURU": ( after: "*db_creature_KAMISHURIKEN", loop_kind: SwitchEnd ),
+
+    // These 2 entries are from previous databases, override previous labels
+    "*db_creature_RESTOROID_KAPPA": ( after: "*db_creature_KAMIORIDURU", loop_kind: SwitchEnd ),
+    "*db_creature_RESTOROID_SABER_TIGER": ( after: "*db_creature_RESTOROID_KAPPA", loop_kind: SwitchEnd ),
+
+    // These 2 entries are from previous databases, override previous labels
+    "*db_item_TOIL_ENERGY_DRINK": ( after: "*db_item", loop_kind: SwitchEnd ),
+    "*db_item_SPLENDID_CHAIN": ( after: "*db_item_TOIL_ENERGY_DRINK", loop_kind: SwitchEnd ),
+  },
+)

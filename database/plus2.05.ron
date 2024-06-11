@@ -940,7 +940,7 @@ AnalysisConfig(
         )
       ]
     ),
-    "*com_tag_team": (
+    "*com_tachi_e": (
       rules: [
         (
           kind: Function,
@@ -948,12 +948,12 @@ AnalysisConfig(
         )
       ]
     ),
-    "*com_tag_team_WHILE1": (
-      after: "*com_tag_team",
+    "*com_tachi_e_WHILE1": (
+      after: "*com_tachi_e",
       loop_kind: While
     ),
-    "*com_tag_team_WEND": (
-      after: "*com_tag_team_WHILE1",
+    "*com_tachi_e_WEND": (
+      after: "*com_tachi_e_WHILE1",
       loop_kind: WhileEnd
     ),
     "*eatEffect": (
