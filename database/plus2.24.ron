@@ -1,0 +1,121 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.24",
+    ax_sha256: "eeb99b73b8cc87eace790e3ecd94d94ffccc0a462428d839ddda4682c416262f"
+  ),
+
+  includes: [
+    "database/plus2.23.ron"
+  ],
+  
+  variable_groups: {
+
+    "chara_id": (
+      variables: [
+        ( name: "CREATURE_ID_HUGE_CHINCHILLA", value: 1116 ),
+        ( name: "CREATURE_ID_HIGH_JUMP_RAT", value: 1117 ),
+        ( name: "CREATURE_ID_RUSH_RAT", value: 1118 ),
+        ( name: "CREATURE_ID_GUNDEGU", value: 1119 ),
+        ( name: "CREATURE_ID_DOPING_GUINEA_PIG", value: 1120 ),
+        ( name: "CREATURE_ID_MOUNTAIN_SHAKER", value: 1121 ),
+        ( name: "CREATURE_ID_ULTIMATE_EXPERIMENTAL", value: 1122 ),
+        ( name: "CREATURE_ID_SAIKYO_NEZUMI", value: 1123 ),
+        
+        ( name: "MAX_CREATURE_ID", value: 1126, code_value: "CREATURE_ID_SAIKYO_NEZUMI + 3" ),
+      ]
+    ),
+
+    "chara_bit": (
+      variables: [
+        ( name: "CHARA_BIT_ENHANCED_ROCK_THROWING", value: 1044, override: true ),
+        ( name: "CHARA_BIT_BRAIN_PARASITE", value: 1045, override: true ),
+      ]
+    ),
+
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_TRAINING_TICKET", value: 1300 ),
+
+        ( name: "MAX_ITEM_ID", value: 1303, code_value: "ITEM_ID_TRAINING_TICKET + 3", exclude: true ),
+      ],
+    ),
+    
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_BRAIN_PARASITIZE", value: 865, override: true ),
+
+        ( name: "MAX_SKILL", value: 866, code_value: "SKILL_SPACT_BRAIN_PARASITIZE + 1" ),
+      ]
+    ),
+
+    "filter_race": (
+      variables: [
+        ( name: "FILTER_RACE_RAT_GUNDEGU", value: 53 ),
+      ]
+    ),
+  },
+    
+  functions: {
+    "calcinvestnpc": (
+      args: {
+        0: (name: "count", type: Int)
+      }
+    ),
+    "calcinvestvalueg": (
+      args: {
+        0: (name: "count", type: Int)
+      }
+    ),
+  },
+
+  labels: {
+
+    "*eatBrainParasite": (
+      rules: [
+        (
+          kind: StringLiteral,
+          match: "の体内に入り込んだ。"
+        )
+      ]
+    ),
+    "*brainParasite_effect": (
+      rules: [
+        (
+          kind: StringLiteral,
+          match: "は脳髄に寄生された。"
+        )
+      ]
+    ),
+    "*eatAlien": (
+      after: "*brainParasite_effect",
+    ),
+
+    "*brainParasite": (
+      rules: [
+        (
+          kind: StringLiteral,
+          match: "は不安げに頭を押さえた。"
+        )
+      ]
+    ),
+    
+    "*db_creature_ULTIMATE_EXPERIMENTAL": ( after: "*db_creature", loop_kind: SwitchEnd ),
+    "*db_creature_MOUNTAIN_SHAKER": ( after: "*db_creature_ULTIMATE_EXPERIMENTAL", loop_kind: SwitchEnd ),
+    "*db_creature_DOPING_GUINEA_PIG": ( after: "*db_creature_MOUNTAIN_SHAKER", loop_kind: SwitchEnd ),
+    "*db_creature_GUNDEGU": ( after: "*db_creature_DOPING_GUINEA_PIG", loop_kind: SwitchEnd ),
+    "*db_creature_RUSH_RAT": ( after: "*db_creature_GUNDEGU", loop_kind: SwitchEnd ),
+    "*db_creature_HIGH_JUMP_RAT": ( after: "*db_creature_RUSH_RAT", loop_kind: SwitchEnd ),
+    "*db_creature_HUGE_CHINCHILLA": ( after: "*db_creature_HIGH_JUMP_RAT", loop_kind: SwitchEnd ),
+
+    // These 2 entries are from previous databases, override previous labels
+    "*db_creature_KAMIHIKOUKI": ( after: "*db_creature_HUGE_CHINCHILLA", loop_kind: SwitchEnd ),
+    "*db_creature_KAMISHURIKEN": ( after: "*db_creature_KAMIHIKOUKI", loop_kind: SwitchEnd ),
+
+    // These 2 entries are from previous databases, override previous labels
+    "*db_item_POTION_PLUG": ( after: "*db_item", loop_kind: SwitchEnd ),
+    "*db_item_TOIL_ENERGY_DRINK": ( after: "*db_item_POTION_PLUG", loop_kind: SwitchEnd ),
+  },
+)
