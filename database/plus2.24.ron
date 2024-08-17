@@ -4,7 +4,7 @@ AnalysisConfig(
   meta: (
     variant_name: "Elona+",
     version: "2.24",
-    ax_sha256: "eeb99b73b8cc87eace790e3ecd94d94ffccc0a462428d839ddda4682c416262f"
+    ax_sha256: "4efb9ba55300a48f601127bfec21696a03346de514e8582ca29f229827b86b00"
   ),
 
   includes: [
