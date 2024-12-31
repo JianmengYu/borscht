@@ -4,7 +4,7 @@ AnalysisConfig(
   meta: (
     variant_name: "Elona+",
     version: "2.25",
-    ax_sha256: "8b25edf062c8b6115b46839f9bdcb53c6aef27f0a408aebf6dd78915308ea1e3"
+    ax_sha256: "0dfdc8d0dabdbf504d756b0837329a8aff75a888a2c063311e5cfc3b24590755"
   ),
 
   includes: [
@@ -49,6 +49,12 @@ AnalysisConfig(
         ( name: "SKILL_SPACT_HIP_ATTACK", value: 867, override: true ),
 
         ( name: "MAX_SKILL", value: 868, code_value: "SKILL_SPACT_HIP_ATTACK + 1" ),
+      ]
+    ),
+
+    "animation_id": (
+      variables: [
+        ( name: "ANIMATION_SHIKIKAMI_BREATH", value: 65 ),
       ]
     ),
 
