@@ -44,8 +44,12 @@ set -e
 # cargo run --release -- analyze -s -o ../elonaplus_sources/2.23-borscht ../elonaplus2.23/start.ax
 # cargo run --release -- unpack ../elonaplus2.24/elonaplus.exe
 # cargo run --release -- analyze -s -o ../elonaplus_sources/2.24-borscht ../elonaplus2.24/start.ax
-cargo run --release -- unpack ../elonaplus2.25/elonaplus.exe
-cargo run --release -- analyze -s -o ../elonaplus_sources/2.25-borscht ../elonaplus2.25/start.ax
+# cargo run --release -- unpack ../elonaplus2.25/elonaplus.exe
+# cargo run --release -- analyze -s -o ../elonaplus_sources/2.25-borscht ../elonaplus2.25/start.ax
+# cargo run --release -- unpack ../elonaplus2.26/elonaplus.exe
+# cargo run --release -- analyze -s -o ../elonaplus_sources/2.26-borscht ../elonaplus2.26/start.ax
+cargo run --release -- unpack ../elonaplus2.27/elonaplus.exe
+cargo run --release -- analyze -s -o ../elonaplus_sources/2.27-borscht ../elonaplus2.27/start.ax
 
 # cargo run --release -- print-vars database/plus1.90.ron > ../elonaplus_sources/defines/1.90.hsp
 # cargo run --release -- print-vars database/plus2.05.ron > ../elonaplus_sources/defines/2.05.hsp
@@ -71,12 +75,15 @@ cargo run --release -- analyze -s -o ../elonaplus_sources/2.25-borscht ../elonap
 # cargo run --release -- print-vars database/plus2.22.ron > ../elonaplus_sources/defines/2.22.hsp
 # cargo run --release -- print-vars database/plus2.23.ron > ../elonaplus_sources/defines/2.23.hsp
 # cargo run --release -- print-vars database/plus2.24.ron > ../elonaplus_sources/defines/2.24.hsp
-cargo run --release -- print-vars database/plus2.25.ron > ../elonaplus_sources/defines/2.25.hsp
+# cargo run --release -- print-vars database/plus2.25.ron > ../elonaplus_sources/defines/2.25.hsp
+# cargo run --release -- print-vars database/plus2.26.ron > ../elonaplus_sources/defines/2.26.hsp
+cargo run --release -- print-vars database/plus2.27.ron > ../elonaplus_sources/defines/2.27.hsp
+
 
 unix2dos ../elonaplus_sources/defines/*.hsp
 
 cd ../elonaplus_sources/defines/
-diff -U5 --recursive '-I\*label_' ./2.24.hsp ./2.25.hsp | unix2dos > a.diff
+diff -U5 --recursive '-I\*label_' ./2.26.hsp ./2.27.hsp | unix2dos > a.diff
 
 set +e
 
@@ -106,7 +113,11 @@ cd ../
 # unix2dos ../elonaplus_sources/2.22-borscht/*.hsp
 # unix2dos ../elonaplus_sources/2.23-borscht/*.hsp
 # unix2dos ../elonaplus_sources/2.24-borscht/*.hsp
-unix2dos ../elonaplus_sources/2.25-borscht/*.hsp
+# unix2dos ../elonaplus_sources/2.25-borscht/*.hsp
+# unix2dos ../elonaplus_sources/2.26-borscht/*.hsp
+unix2dos ../elonaplus_sources/2.27-borscht/*.hsp
+
+
 
 cd ./diff/
 pushd ../elonaplus_sources/diff
@@ -166,10 +177,16 @@ pushd ../elonaplus_sources/diff
 # diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.23-borscht/ ../2.24-borscht/ | unix2dos > 2.23-to-2.24.diff
 # diff -U5 --recursive '-I\*label_' '-b' ../2.23-borscht/db_item.hsp ../2.24-borscht/db_item.hsp | unix2dos > 2.23-to-2.24.db_item.diff
 # diff -U5 --recursive '-I\*label_' '-Ifilter_creature'  ../2.23-borscht/db_creature.hsp ../2.24-borscht/db_creature.hsp | unix2dos > 2.23-to-2.24.db_creature.diff
+# diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.24-borscht/ ../2.25-borscht/ | unix2dos > 2.24-to-2.25.diff
+# diff -U5 --recursive '-I\*label_' '-b' ../2.24-borscht/db_item.hsp ../2.25-borscht/db_item.hsp | unix2dos > 2.24-to-2.25.db_item.diff
+# diff -U5 --recursive '-I\*label_' '-Ifilter_creature'  ../2.24-borscht/db_creature.hsp ../2.25-borscht/db_creature.hsp | unix2dos > 2.24-to-2.25.db_creature.diff
+# diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.25-borscht/ ../2.26-borscht/ | unix2dos > 2.25-to-2.26.diff
+# diff -U5 --recursive '-I\*label_' '-b' ../2.25-borscht/db_item.hsp ../2.26-borscht/db_item.hsp | unix2dos > 2.25-to-2.26.db_item.diff
+# diff -U5 --recursive '-I\*label_' '-Ifilter_creature'  ../2.25-borscht/db_creature.hsp ../2.26-borscht/db_creature.hsp | unix2dos > 2.25-to-2.26.db_creature.diff
 
-diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.24-borscht/ ../2.25-borscht/ | unix2dos > 2.24-to-2.25.diff
-diff -U5 --recursive '-I\*label_' '-b' ../2.24-borscht/db_item.hsp ../2.25-borscht/db_item.hsp | unix2dos > 2.24-to-2.25.db_item.diff
-diff -U5 --recursive '-I\*label_' '-Ifilter_creature'  ../2.24-borscht/db_creature.hsp ../2.25-borscht/db_creature.hsp | unix2dos > 2.24-to-2.25.db_creature.diff
+diff -U5 --recursive -x 'db_creature*' -x 'db_item*' '-I\*label_' ../2.26-borscht/ ../2.27-borscht/ | unix2dos > 2.26-to-2.27.diff
+diff -U5 --recursive '-I\*label_' '-b' ../2.26-borscht/db_item.hsp ../2.27-borscht/db_item.hsp | unix2dos > 2.26-to-2.27.db_item.diff
+diff -U5 --recursive '-I\*label_' '-Ifilter_creature'  ../2.26-borscht/db_creature.hsp ../2.27-borscht/db_creature.hsp | unix2dos > 2.26-to-2.27.db_creature.diff
 
 
 

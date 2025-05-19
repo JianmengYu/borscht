@@ -1,0 +1,107 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.26",
+    ax_sha256: "da37c1268955cac8daaceff65457e9913689bcc09a62c460af972a831249b785"
+  ),
+
+  includes: [
+    "database/plus2.25.ron"
+  ],
+  
+  variable_groups: {
+
+    "chara_id": (
+      variables: [
+        ( name: "CREATURE_ID_KYU_BI", value: 1125 ),
+        ( name: "CREATURE_ID_GODWOLF", value: 1126 ),
+        ( name: "CREATURE_ID_SPADE_WARRIOR", value: 1127 ),
+        ( name: "CREATURE_ID_CLUB_FEATHER", value: 1128 ),
+        ( name: "CREATURE_ID_DIAMOND_EYES", value: 1129 ),
+        ( name: "CREATURE_ID_HEART_WITCH", value: 1130 ),
+        
+        ( name: "MAX_CREATURE_ID", value: 1133, code_value: "CREATURE_ID_HEART_WITCH + 3" ),
+      ]
+    ),
+
+    "chara_bit": (
+      variables: [
+      ]
+    ),
+
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_KONMOU_HAPPA", value: 1302 ),
+        ( name: "ITEM_ID_HONEGUM", value: 1303 ),
+        ( name: "ITEM_ID_ECHINOBOX", value: 1304 ),
+        ( name: "ITEM_ID_LIGHTNING_DISCHARGER", value: 1305 ),
+
+        ( name: "MAX_ITEM_ID", value: 1308, code_value: "ITEM_ID_LIGHTNING_DISCHARGER + 3", exclude: true ),
+      ],
+    ),
+
+    "item_effect": (
+      variables: [
+      ]
+    ),
+    
+    
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_POKER_FORCE", value: 868, override: true ),
+
+        ( name: "MAX_SKILL", value: 869, code_value: "SKILL_SPACT_POKER_FORCE + 1" ),
+      ]
+    ),
+
+    "animation_id": (
+      variables: [
+        ( name: "ANIMATION_CUT_IN", value: 66 ),
+        ( name: "ANIMATION_SHOWDOWN_HIGH_CARD", value: 67 ),
+      ]
+    ),
+
+    "mdata": (
+      variables: [
+      ]
+    ),
+  },
+    
+  functions: {
+    "txtsetpforce": (
+      args: {
+        0: (name: "arg1", type: Int)
+      }
+    ),
+  },
+
+  labels: {
+    "*screen_cutin1": (
+      after: "*screen_snow"
+    ),
+    "*screen_cutin2": (
+      after: "*screen_cutin1"
+    ),
+    "*screen_ocean": (
+      after: "*screen_cutin2"
+    ),
+
+    // These 2 entries are from previous databases, override previous labels
+    "*db_creature_DIAMOND_EYES": ( after: "*db_creature", loop_kind: SwitchEnd ),
+    "*db_creature_CLUB_FEATHER": ( after: "*db_creature_DIAMOND_EYES", loop_kind: SwitchEnd ),
+    "*db_creature_SPADE_WARRIOR": ( after: "*db_creature_CLUB_FEATHER", loop_kind: SwitchEnd ),
+    "*db_creature_GODWOLF": ( after: "*db_creature_SPADE_WARRIOR", loop_kind: SwitchEnd ),
+    "*db_creature_KYU_BI": ( after: "*db_creature_GODWOLF", loop_kind: SwitchEnd ),
+    "*db_creature_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI": ( after: "*db_creature_KYU_BI", loop_kind: SwitchEnd ),
+    "*db_creature_SAIKYO_NEZUMI": ( after: "*db_creature_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI", loop_kind: SwitchEnd ),
+
+    // These 2 entries are from previous databases, override previous labels
+    "*db_item_ECHINOBOX": ( after: "*db_item", loop_kind: SwitchEnd ),
+    "*db_item_HONEGUM": ( after: "*db_item_ECHINOBOX", loop_kind: SwitchEnd ),
+    "*db_item_KONMOU_HAPPA": ( after: "*db_item_HONEGUM", loop_kind: SwitchEnd ),
+    "*db_item_HIDEN_MASHI": ( after: "*db_item_KONMOU_HAPPA", loop_kind: SwitchEnd ),
+    "*db_item_TRAINING_TICKET": ( after: "*db_item_HIDEN_MASHI", loop_kind: SwitchEnd ),
+  },
+)
