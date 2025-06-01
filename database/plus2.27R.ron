@@ -1,0 +1,98 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.27R",
+    ax_sha256: "f9e3bcac6fcc05aef140b132eaae9e7701deee5697783010bdf2774569a80ec0"
+  ),
+
+  includes: [
+    "database/plus2.27.ron"
+  ],
+  
+  variable_groups: {
+
+    "action_1": (
+      variables: [
+      ]
+    ),
+
+    "buff_id": (
+      variables: [
+      ]
+    ),
+
+    "chara_id": (
+      variables: [
+      ]
+    ),
+
+    "chara_bit": (
+      variables: [
+      ]
+    ),
+
+    "dbmode_flavor": (
+        variables: [
+        ]
+    ),
+
+    "item_id": (
+      variables: [
+      ],
+    ),
+
+    "item_effect": (
+      variables: [
+      ]
+    ),
+    
+    "sound_id": (
+      variables: [
+        ( name: "SOUNDLIST_CAT03", value: 309 ),
+        ( name: "SOUNDLIST_DOG02", value: 310 ),
+        ( name: "SOUNDLIST_MAX", value: 311, code_value: "SOUNDLIST_DOG02 + 1", override:true, exclude: true ),
+      ]
+    ),
+    
+    "skill_spact": (
+      variables: [
+      ]
+    ),
+
+    "animation_id": (
+      variables: [
+      ]
+    ),
+
+    "mdata": (
+      variables: [
+      ]
+    ),
+  },
+    
+  functions: {
+  },
+
+  labels: {
+    "*item_cook": (
+      rules: [
+        (
+          kind: Assignment,
+          match: "itzp = stat",
+          override:true
+        )
+      ]
+    ),
+    "*com_log": (
+      rules: [
+        (
+          kind: Assignment,
+          match: "wy = inf_msgy - (inf_maxlog - 3) * inf_msgspace - 1",
+          override:true
+        )
+      ]
+    ),
+  },
+)
