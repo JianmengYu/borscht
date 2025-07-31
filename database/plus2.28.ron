@@ -1,0 +1,113 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.28",
+    ax_sha256: "c008319c6276d0e99da1a714b67ac3a955e630ac093cccbe717eb5bd51edac11"
+  ),
+
+  includes: [
+    "database/plus2.27R.ron"
+  ],
+  
+  variable_groups: {
+
+    "action_1": (
+      variables: [
+      ]
+    ),
+
+    "buff_id": (
+      variables: [
+      ]
+    ),
+
+    "chara_id": (
+      variables: [
+      ]
+    ),
+
+    "cdata": (
+      variables: [
+        ( name: "CDATA_PIC_MIMIRROCRY", value: 429, override: true ),
+      ]
+    ),
+
+
+    "chara_bit": (
+      variables: [
+        ( name: "CHARA_BIT_EAT_RAW_ITEM", value: 1050, override: true ),
+        ( name: "CHARA_BIT_GIVEN_BIRTH", value: 1051, override: true ),
+      ]
+    ),
+
+    "dbmode_flavor": (
+        variables: [
+          ( name: "DBMODE_PLEASURE", value: 150 ),
+          ( name: "DBMODE_PLEASURE_HARD", value: 151 ),
+        ]
+    ),
+
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_MIMIRROCRY", value: 1308 ),
+        ( name: "ITEM_ID_SURSTROMMING", value: 1309 ),
+
+        ( name: "MAX_ITEM_ID", value: 1312, code_value: "ITEM_ID_SURSTROMMING + 3", exclude: true ),
+      ],
+    ),
+
+    "item_effect": (
+      variables: [
+        ( name: "EFFECT_MIMIRROCRY", value: 150 ),
+      ]
+    ),
+
+    "random_event": (
+      variables: [
+        ( name: "RANDOM_EVENT_SEA_EVENT", value: 56 ),
+      ]
+    ),
+    
+    "sound_id": (
+      variables: [
+      ]
+    ),
+    
+    "skill_spact": (
+      variables: [
+      ]
+    ),
+
+    "animation_id": (
+      variables: [
+      ]
+    ),
+
+    "mdata": (
+      variables: [
+      ]
+    ),
+  },
+    
+  functions: {
+  },
+
+  labels: {
+
+    "*act_attack": (
+      rules: [
+        (
+          kind: StringLiteral,
+          match: "は反射的に先制射撃を行った。"
+        )
+      ]
+    ),
+    
+    "*db_item_MIMIRROCRY": ( after: "*db_item", loop_kind: SwitchEnd ),
+    "*db_item_SNOW_CRYSTAL": ( after: "*db_item_MIMIRROCRY", loop_kind: SwitchEnd ),
+    "*db_item_DARKNESSBANG": ( after: "*db_item_SNOW_CRYSTAL", loop_kind: SwitchEnd ),
+
+  },
+)
