@@ -49,6 +49,23 @@ AnalysisConfig(
         ]
     ),
 
+    "gdata": (
+      variables: [
+        (
+          name: "GDATA_FLAG_FIGHTER_GUILD_NEFIA_TYPE",
+          value: 693,
+          code_value: "STARTING_GDATA_FLAG + 443",
+          override: true,
+        ),
+        (
+          name: "GDATA_FLAG_FIGHTER_GUILD_NEFIA_MIN_LEVEL",
+          value: 268,
+          code_value: "STARTING_GDATA_FLAG + 18",
+          override: true,
+        ),
+      ]
+    ),
+
     "item_id": (
       variables: [
         ( name: "ITEM_ID_MIMIRROCRY", value: 1308 ),

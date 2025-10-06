@@ -1,0 +1,105 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.29",
+    ax_sha256: "9436c78fac975d9f89c326382fd4216da0a6662cd81bdcc03aa519906705aaed"
+  ),
+
+  includes: [
+    "database/plus2.28.ron"
+  ],
+  
+  variable_groups: {
+
+    "action_1": (
+      variables: [
+      ]
+    ),
+
+    "buff_id": (
+      variables: [
+      ]
+    ),
+
+    "chara_id": (
+      variables: [
+      ]
+    ),
+
+    "cdata": (
+      variables: [
+        ( name: "CDATA_MARK_ITEM_ADJUST_L", value: 99, override: true ),
+      ]
+    ),
+
+    "chara_bit": (
+      variables: [
+        ( name: "CHARA_BIT_ITEM_MARK_FRONTBACK", value: 1025, override: true ),
+        ( name: "CHARA_BIT_ITEM_MARK_FLIP", value: 1052, override: true ),
+        ( name: "CHARA_BIT_PRECIOUS_ALLY", value: 1053, override: true ),
+      ]
+    ),
+
+    "dbmode_flavor": (
+        variables: [
+        ]
+    ),
+
+    "gdata": (
+      variables: [
+      ]
+    ),
+
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_HAIRMET", value: 1310 ),
+        ( name: "ITEM_ID_GENOCIDE_TAIL", value: 1311 ),
+        ( name: "ITEM_ID_EXPOOPSION", value: 1312 ),
+
+        ( name: "MAX_ITEM_ID", value: 1312, code_value: "ITEM_ID_EXPOOPSION + 3", exclude: true ),
+      ],
+    ),
+
+    "item_effect": (
+      variables: [
+        ( name: "EFFECT_HAIRMET", value: 151 ),
+        ( name: "EFFECT_GENOCIDE_TAIL", value: 152 ),
+      ]
+    ),
+
+    
+    "random_event": (
+      variables: [
+        ( name: "RANDOM_EVENT_RELIEF_SUPPLIES", value: 57 ),
+      ]
+    ),
+    
+    "recipe_blend": (
+      variables: [
+        ( name: "RECIPE_BLEND_ACTION_APPEARANCE_IMITATION", value: 10024 ),
+      ]
+    ),
+
+    "rf_id": (
+      variables: [
+        ( name: "RF_REFERENCE_ITEM", value: 9030, code_value: "EXT_RF + 30", override: true ),
+
+        ( name: "MAX_RF", value: 9031, code_value: "RF_REFERENCE_ITEM + 1" ),
+      ]
+    ),
+  },
+    
+  functions: {
+  },
+
+  labels: {
+
+    "*db_item_GENOCIDE_TAIL": ( after: "*db_item", loop_kind: SwitchEnd ),
+    "*db_item_HAIRMET": ( after: "*db_item_GENOCIDE_TAIL", loop_kind: SwitchEnd ),
+    "*db_item_SURSTROMMING": ( after: "*db_item_HAIRMET", loop_kind: SwitchEnd ),
+    "*db_item_MIMIRROCRY": ( after: "*db_item_SURSTROMMING", loop_kind: SwitchEnd ),
+
+  },
+)
