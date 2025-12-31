@@ -1,0 +1,124 @@
+#![enable(implicit_some)]
+
+AnalysisConfig(
+  meta: (
+    variant_name: "Elona+",
+    version: "2.30",
+    ax_sha256: "9ddb26f786d23b00a8fcaac5e193ac267038e5d22fdf5cafadade007f0bde620"
+  ),
+
+  includes: [
+    "database/plus2.29.ron"
+  ],
+  
+  variable_groups: {
+
+    "chara_id": (
+      variables: [
+        ( name: "CREATURE_ID_GAKI_MOTUHEGUI", value: 1131 ),
+        ( name: "CREATURE_ID_MOTUHEGUI", value: 1132 ),
+        ( name: "CREATURE_ID_THIEF_LIGHT_TRUCK", value: 1133 ),
+        ( name: "CREATURE_ID_VICIOUS_RACCOON", value: 1134 ),
+        ( name: "CREATURE_ID_MATICK", value: 1135 ),
+        ( name: "CREATURE_ID_MADEER", value: 1136 ),
+        
+        ( name: "MAX_CREATURE_ID", value: 1139, code_value: "CREATURE_ID_MADEER + 3" ),
+      ]
+    ),
+
+    "chara_bit": (
+      variables: [
+        ( name: "CHARA_BIT_HIDDEN_BOMB", value: 1054, override: true ),
+      ]
+    ),
+
+    "event": (
+      variables: [
+        ( name: "EVENT_MATICK_SPAWN", value: 98 ),
+        ( name: "EVENT_HARVEST_ENEMY", value: 99 ),
+      ]
+    ),
+
+
+    "item_id": (
+      variables: [
+        ( name: "ITEM_ID_BLANK_CARD", value: 1313 ),
+        ( name: "ITEM_ID_TURAHAGI", value: 1314 ),
+
+        ( name: "MAX_ITEM_ID", value: 1317, code_value: "ITEM_ID_TURAHAGI + 3", exclude: true ),
+      ],
+    ),
+
+    "item_effect": (
+      variables: [
+      ]
+    ),
+    
+    "skill_spact": (
+      variables: [
+        ( name: "SKILL_SPACT_HIDDEN_EXPLOSIVE", value: 871, override: true ),
+        ( name: "SKILL_SPACT_ROCKET_BOOST", value: 872, override: true ),
+        ( name: "SKILL_SPACT_GUIDED_BOMBING", value: 873, override: true ),
+        ( name: "SKILL_SPACT_RESCUE_REQUEST", value: 874, override: true ),
+
+        ( name: "MAX_SKILL", value: 875, code_value: "SKILL_SPACT_RESCUE_REQUEST + 1" ),
+      ]
+    ),
+
+    "trait_normal": (
+      variables: [
+        ( name: "TRAIT_NORMAL_SPACT_BOMBER", value: 50, ),
+
+        ( name: "MAX_NORMAL_TRAIT", value: 51, code_value: "TRAIT_NORMAL_SPACT_BOMBER + 1", override: true )
+      ]
+    ),
+
+    "mdata": (
+      variables: [
+        ( name: "MDATA_WEREWOLF_POLICY", value: 35 ),
+        ( name: "MDATA_BEAR_EXTERMINATION", value: 36 ),
+      ]
+    ),
+  },
+    
+  functions: {
+  },
+
+  labels: {
+
+    "*com_hijump": (
+      rules: [
+        (
+          kind: Assignment,
+          match: "xxx = cdata(CDATA_X, CHARA_PLAYER) - 2"
+        )
+      ]
+    ),
+
+    "*config_init": (
+      rules: [
+        (
+          kind: Function,
+          match: "sdim key_buff, 4, 66"
+        )
+      ]
+    ),
+    
+    "*db_creature_MATICK": ( after: "*db_creature", loop_kind: SwitchEnd ),
+    "*db_creature_VICIOUS_RACCOON": ( after: "*db_creature_MATICK", loop_kind: SwitchEnd ),
+    "*db_creature_THIEF_LIGHT_TRUCK": ( after: "*db_creature_VICIOUS_RACCOON", loop_kind: SwitchEnd ),
+    "*db_creature_MOTUHEGUI": ( after: "*db_creature_THIEF_LIGHT_TRUCK", loop_kind: SwitchEnd ),
+    "*db_creature_GAKI_MOTUHEGUI": ( after: "*db_creature_MOTUHEGUI", loop_kind: SwitchEnd ),
+    "*db_creature_HEART_WITCH": ( after: "*db_creature_GAKI_MOTUHEGUI", loop_kind: SwitchEnd ),
+    // This override previous labels
+    "*db_creature_DIAMOND_EYES": ( after: "*db_creature_HEART_WITCH", loop_kind: SwitchEnd ),
+
+    "*db_item_BLANK_CARD": ( after: "*db_item", loop_kind: SwitchEnd ),
+    "*db_item_EXPOOPSION": ( after: "*db_item_BLANK_CARD", loop_kind: SwitchEnd ),
+    // This override previous labels
+    "*db_item_GENOCIDE_TAIL": ( after: "*db_item_EXPOOPSION", loop_kind: SwitchEnd ),
+
+
+
+  },
+)
